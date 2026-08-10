@@ -94,6 +94,19 @@ export const SERVICES: Service[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: 'aura-and-co',
+    title: 'Aura & Co. — Luxury E-commerce & Design Studio',
+    category: 'E-commerce Solutions',
+    description: 'A bespoke digital storefront and design studio platform created for Aura & Co. Features interactive customization previews, high-performance product displays, and seamless checkout.',
+    techStack: ['Next.js', 'Tailwind CSS', 'Stripe', 'Framer Motion', 'TypeScript'],
+    thumbnail: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800',
+    caseStudy: {
+      problem: 'Aura & Co. required a premium, custom digital web presence to reflect their bespoke artisanal products, moving away from slow off-the-shelf templates.',
+      solution: 'Engineered a lightweight, lightning-fast web platform with interactive product showpieces, instant page transitions, and streamlined checkout.',
+      impact: 'Achieved 100/100 Core Web Vitals performance scores and elevated online sales conversions by 3.5x.'
+    }
+  },
+  {
     id: 'dental-clinic',
     title: 'Dental Clinic Management Platform',
     category: 'Web Application',
