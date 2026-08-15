@@ -58,7 +58,7 @@ export default function Footer({ theme, setActiveTab }: FooterProps) {
             </p>
             <div className="flex space-x-4">
               <a
-                href="mailto:nexward01@gmail.com"
+                href="mailto:nexwardtech01@gmail.com"
                 className={`p-2.5 rounded-full border transition-all ${
                   theme === 'light'
                     ? 'border-black/5 bg-white hover:bg-black/5 text-black'
@@ -104,7 +104,7 @@ export default function Footer({ theme, setActiveTab }: FooterProps) {
               theme === 'light' ? 'text-neutral-600' : 'text-white/60'
             }`}>
               <p>Karnal, Haryana<br />India — 132001</p>
-              <p className="font-mono text-xs">nexward01@gmail.com</p>
+              <p className="font-mono text-xs">nexwardtech01@gmail.com</p>
               <p className="font-mono text-xs">+91 79882 42622</p>
             </div>
           </div>
