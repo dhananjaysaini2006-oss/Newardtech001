@@ -15,6 +15,13 @@ interface PortfolioProps {
 
 export default function Portfolio({ theme }: PortfolioProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
+  const categories = ['All', 'Web Applications', 'E-Commerce', 'SaaS Platforms', 'Fintech', 'Real Estate'];
+
+  const filteredProjects = selectedCategory === 'All'
+    ? PROJECTS
+    : PROJECTS.filter(p => p.category.toLowerCase().includes(selectedCategory.toLowerCase()) || selectedCategory.toLowerCase().includes(p.category.toLowerCase()));
 
   return (
     <div className={`relative min-h-screen w-full pt-32 pb-24 bg-transparent ${
@@ -31,10 +38,16 @@ export default function Portfolio({ theme }: PortfolioProps) {
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
         
         {/* Title Section */}
-        <div className="max-w-3xl mb-20 space-y-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-20 space-y-6"
+        >
           <span className={`text-xs uppercase font-mono tracking-widest px-3 py-1 rounded-full border inline-block ${
             theme === 'light'
-              ? 'border-black/5 bg-black/5 text-[#6f6f6f]'
+              ? 'border-neutral-200 bg-neutral-100 text-neutral-800 font-medium'
               : 'border-white/5 bg-white/5 text-violet-400'
           }`}>
             Visual Archive
@@ -43,23 +56,72 @@ export default function Portfolio({ theme }: PortfolioProps) {
             Selected Lab Works &<br />Client Deliveries.
           </h1>
           <p className={`text-base sm:text-lg max-w-xl leading-relaxed ${
-            theme === 'light' ? 'text-[#6F6F6F]' : 'text-white/60'
+            theme === 'light' ? 'text-neutral-600' : 'text-white/60'
           }`}>
             An elite showcase of custom codebases, high-performing schemas, and gorgeous graphic designs built for actual businesses.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Portfolio Grid with Hover-Zoom */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PROJECTS.map((project) => (
-            <div
-              key={project.id}
-              className={`rounded-3xl border overflow-hidden flex flex-col justify-between transition-all duration-500 group cursor-pointer ${
-                theme === 'light'
-                  ? 'bg-neutral-50 border-black/5 hover:shadow-xl hover:shadow-black/5'
-                  : 'bg-[#0a0a0f] border-white/5 hover:border-violet-500/20 hover:shadow-2xl hover:shadow-violet-500/5'
-              }`}
-            >
+        {/* Category Filters with sliding pill motion */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="flex flex-wrap items-center gap-2 mb-12"
+        >
+          {categories.map((cat) => {
+            const isSelected = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`relative px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer ${
+                  isSelected
+                    ? theme === 'light'
+                      ? 'text-white font-semibold'
+                      : 'text-black font-semibold'
+                    : theme === 'light'
+                      ? 'text-neutral-700 hover:text-black bg-white border border-neutral-200 shadow-sm'
+                      : 'text-white/60 hover:text-white bg-white/[0.03] border border-white/5'
+                }`}
+              >
+                {isSelected && (
+                  <motion.div
+                    layoutId="portfolioFilterPill"
+                    className={`absolute inset-0 rounded-full shadow-md ${
+                      theme === 'light' ? 'bg-neutral-950' : 'bg-white'
+                    }`}
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{cat}</span>
+              </button>
+            );
+          })}
+        </motion.div>
+
+        {/* Portfolio Grid with Hover-Zoom & whileInView staggered reveal */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className={`rounded-3xl border overflow-hidden flex flex-col justify-between transition-all duration-500 group cursor-pointer ${
+                  theme === 'light'
+                    ? 'bg-white border-neutral-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-xl hover:border-neutral-300'
+                    : 'bg-[#0a0a0f] border-white/5 hover:border-violet-500/20 hover:shadow-2xl hover:shadow-violet-500/5'
+                }`}
+              >
               {/* Image Container with zoom hover effect */}
               <div className="relative aspect-video overflow-hidden w-full bg-neutral-900">
                 <img
@@ -87,13 +149,15 @@ export default function Portfolio({ theme }: PortfolioProps) {
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className={`text-[10px] font-mono uppercase tracking-widest ${
-                      theme === 'light' ? 'text-neutral-500' : 'text-white/40'
+                      theme === 'light' ? 'text-neutral-500 font-semibold' : 'text-white/40'
                     }`}>
                       {project.category}
                     </span>
                   </div>
 
-                  <h3 className="font-serif text-2xl tracking-tight mb-3 group-hover:text-violet-400 transition-colors">
+                  <h3 className={`font-serif text-2xl tracking-tight mb-3 transition-colors ${
+                    theme === 'light' ? 'text-neutral-950 group-hover:text-violet-600' : 'text-white group-hover:text-violet-400'
+                  }`}>
                     {project.title}
                   </h3>
 
@@ -112,7 +176,7 @@ export default function Portfolio({ theme }: PortfolioProps) {
                         key={tIdx}
                         className={`text-[10px] font-mono px-2.5 py-1 rounded-full border ${
                           theme === 'light'
-                            ? 'border-black/5 bg-black/5 text-[#6f6f6f]'
+                            ? 'border-neutral-200 bg-neutral-100 text-neutral-800 font-medium'
                             : 'border-white/5 bg-white/5 text-violet-300'
                         }`}
                       >
@@ -125,7 +189,7 @@ export default function Portfolio({ theme }: PortfolioProps) {
                   <button
                     onClick={() => setSelectedProject(project)}
                     className={`text-xs font-mono font-medium flex items-center space-x-2 transition-all cursor-pointer ${
-                      theme === 'light' ? 'text-black hover:opacity-80' : 'text-violet-400 hover:text-violet-300'
+                      theme === 'light' ? 'text-neutral-950 hover:text-violet-600 font-semibold' : 'text-violet-400 hover:text-violet-300'
                     }`}
                   >
                     <BookOpen size={13} />
@@ -134,9 +198,10 @@ export default function Portfolio({ theme }: PortfolioProps) {
                 </div>
               </div>
 
-            </div>
+            </motion.div>
           ))}
-        </div>
+          </AnimatePresence>
+        </motion.div>
 
         {/* --- CASE STUDY DETAIL MODAL --- */}
         <AnimatePresence>

@@ -183,7 +183,9 @@ export default function ContactForm({ theme }: ContactFormProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Full Name */}
                 <div className="flex flex-col space-y-2">
-                  <label htmlFor="name" className="text-xs font-mono uppercase tracking-wider opacity-60">
+                  <label htmlFor="name" className={`text-xs font-mono uppercase tracking-wider ${
+                    theme === 'light' ? 'text-neutral-600 font-semibold' : 'opacity-60'
+                  }`}>
                     Your Name *
                   </label>
                   <input
@@ -196,7 +198,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
                     placeholder="Enter your name"
                     className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
                       theme === 'light'
-                        ? 'bg-white border-black/10 focus:border-black text-black'
+                        ? 'bg-white border-neutral-300 focus:border-neutral-950 focus:ring-2 focus:ring-neutral-950/10 text-neutral-900 shadow-sm placeholder:text-neutral-400'
                         : 'bg-white/5 border-white/5 focus:border-violet-500/50 text-white'
                     }`}
                   />
@@ -204,7 +206,9 @@ export default function ContactForm({ theme }: ContactFormProps) {
 
                 {/* Email */}
                 <div className="flex flex-col space-y-2">
-                  <label htmlFor="email" className="text-xs font-mono uppercase tracking-wider opacity-60">
+                  <label htmlFor="email" className={`text-xs font-mono uppercase tracking-wider ${
+                    theme === 'light' ? 'text-neutral-600 font-semibold' : 'opacity-60'
+                  }`}>
                     Email Address *
                   </label>
                   <input
@@ -217,7 +221,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
                     placeholder="Enter your email address"
                     className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
                       theme === 'light'
-                        ? 'bg-white border-black/10 focus:border-black text-black'
+                        ? 'bg-white border-neutral-300 focus:border-neutral-950 focus:ring-2 focus:ring-neutral-950/10 text-neutral-900 shadow-sm placeholder:text-neutral-400'
                         : 'bg-white/5 border-white/5 focus:border-violet-500/50 text-white'
                     }`}
                   />
@@ -227,7 +231,9 @@ export default function ContactForm({ theme }: ContactFormProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Phone */}
                 <div className="flex flex-col space-y-2">
-                  <label htmlFor="phone" className="text-xs font-mono uppercase tracking-wider opacity-60">
+                  <label htmlFor="phone" className={`text-xs font-mono uppercase tracking-wider ${
+                    theme === 'light' ? 'text-neutral-600 font-semibold' : 'opacity-60'
+                  }`}>
                     Phone Number
                   </label>
                   <div className="flex space-x-2">
@@ -238,7 +244,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
                       onChange={handleInputChange}
                       className={`px-3 py-3 rounded-xl border text-sm outline-none transition-all cursor-pointer font-mono shrink-0 max-w-[110px] ${
                         theme === 'light'
-                          ? 'bg-white border-black/10 focus:border-black text-black'
+                          ? 'bg-white border-neutral-300 focus:border-neutral-950 text-neutral-900 shadow-sm'
                           : 'bg-black border-white/5 focus:border-violet-500/50 text-white'
                       }`}
                       aria-label="Global Phone Country Code"
@@ -258,7 +264,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
                       placeholder="Enter phone number"
                       className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
                         theme === 'light'
-                          ? 'bg-white border-black/10 focus:border-black text-black'
+                          ? 'bg-white border-neutral-300 focus:border-neutral-950 focus:ring-2 focus:ring-neutral-950/10 text-neutral-900 shadow-sm placeholder:text-neutral-400'
                           : 'bg-white/5 border-white/5 focus:border-violet-500/50 text-white'
                       }`}
                     />
@@ -267,7 +273,9 @@ export default function ContactForm({ theme }: ContactFormProps) {
 
                 {/* Budget Range & Currency */}
                 <div className="flex flex-col space-y-2">
-                  <label htmlFor="budgetRange" className="text-xs font-mono uppercase tracking-wider opacity-60">
+                  <label htmlFor="budgetRange" className={`text-xs font-mono uppercase tracking-wider ${
+                    theme === 'light' ? 'text-neutral-600 font-semibold' : 'opacity-60'
+                  }`}>
                     Project Budget Range
                   </label>
                   <div className="flex space-x-2">
@@ -286,7 +294,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
                       }}
                       className={`px-3 py-3 rounded-xl border text-sm outline-none transition-all cursor-pointer font-mono shrink-0 max-w-[110px] ${
                         theme === 'light'
-                          ? 'bg-white border-black/10 focus:border-black text-black'
+                          ? 'bg-white border-neutral-300 focus:border-neutral-950 text-neutral-900 shadow-sm'
                           : 'bg-black border-white/5 focus:border-violet-500/50 text-white'
                       }`}
                       aria-label="Global Currency"
@@ -304,7 +312,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all cursor-pointer ${
                         theme === 'light'
-                          ? 'bg-white border-black/10 focus:border-black text-black'
+                          ? 'bg-white border-neutral-300 focus:border-neutral-950 text-neutral-900 shadow-sm'
                           : 'bg-black border-white/5 focus:border-violet-500/50 text-white'
                       }`}
                     >
@@ -320,7 +328,9 @@ export default function ContactForm({ theme }: ContactFormProps) {
 
               {/* Project Details */}
               <div className="flex flex-col space-y-2">
-                <label htmlFor="projectDetails" className="text-xs font-mono uppercase tracking-wider opacity-60">
+                <label htmlFor="projectDetails" className={`text-xs font-mono uppercase tracking-wider ${
+                  theme === 'light' ? 'text-neutral-600 font-semibold' : 'opacity-60'
+                }`}>
                   Project Details & Goals *
                 </label>
                 <textarea
@@ -333,7 +343,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
                   placeholder="Tell us about your brand, requirements, deadlines, and features you need..."
                   className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all resize-none ${
                     theme === 'light'
-                      ? 'bg-white border-black/10 focus:border-black text-black'
+                      ? 'bg-white border-neutral-300 focus:border-neutral-950 focus:ring-2 focus:ring-neutral-950/10 text-neutral-900 shadow-sm placeholder:text-neutral-400'
                       : 'bg-white/5 border-white/5 focus:border-violet-500/50 text-white'
                   }`}
                 />
@@ -373,7 +383,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
         
         {/* Contact Info Card */}
         <div className={`p-8 rounded-3xl border ${
-          theme === 'light' ? 'bg-neutral-50/50 border-black/5' : 'bg-[#0a0a0f] border-white/5'
+          theme === 'light' ? 'bg-white border-neutral-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)]' : 'bg-[#0a0a0f] border-white/5'
         }`}>
           <h3 className="font-serif text-2xl tracking-tight mb-6">Studio Directory</h3>
           
@@ -386,7 +396,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
               <div>
                 <span className="text-[10px] uppercase font-mono tracking-wider opacity-50">General Inquiries</span>
                 <p className="text-sm font-semibold font-mono mt-0.5">nexward01@gmail.com</p>
-                <p className={`text-xs ${theme === 'light' ? 'text-[#6F6F6F]' : 'text-white/40'}`}>Typically responds within 2 hours</p>
+                <p className={`text-xs ${theme === 'light' ? 'text-neutral-500' : 'text-white/40'}`}>Typically responds within 2 hours</p>
               </div>
             </div>
 
@@ -400,7 +410,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
                   <span>🇮🇳</span>
                   <span>+91 79882 42622</span>
                 </p>
-                <p className={`text-xs ${theme === 'light' ? 'text-[#6F6F6F]' : 'text-white/40'}`}>Active 10:00 AM — 7:00 PM IST</p>
+                <p className={`text-xs ${theme === 'light' ? 'text-neutral-500' : 'text-white/40'}`}>Active 10:00 AM — 7:00 PM IST</p>
               </div>
             </div>
 
@@ -412,7 +422,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
               <div>
                 <span className="text-[10px] uppercase font-mono tracking-wider opacity-50">Global Headquarters</span>
                 <p className="text-sm font-semibold mt-0.5">Karnal, Haryana, India</p>
-                <p className={`text-xs ${theme === 'light' ? 'text-[#6F6F6F]' : 'text-white/40'}`}>Sector-13, Urban Estate, Code 132001</p>
+                <p className={`text-xs ${theme === 'light' ? 'text-neutral-500' : 'text-white/40'}`}>Sector-13, Urban Estate, Code 132001</p>
               </div>
             </div>
           </div>
@@ -420,7 +430,7 @@ export default function ContactForm({ theme }: ContactFormProps) {
 
         {/* Global Reach Message */}
         <div className={`p-8 rounded-3xl border relative overflow-hidden ${
-          theme === 'light' ? 'bg-neutral-50/50 border-black/5' : 'bg-[#0a0a0f] border-white/5'
+          theme === 'light' ? 'bg-white border-neutral-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)]' : 'bg-[#0a0a0f] border-white/5'
         }`}>
           {/* Subtle graphic design */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/5 blur-xl rounded-full" />

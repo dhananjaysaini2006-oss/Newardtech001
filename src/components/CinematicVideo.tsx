@@ -62,53 +62,63 @@ export default function CinematicVideo({ theme }: CinematicVideoProps) {
 
   // Determine ambient background colors based on theme
   const ambientBg = theme === 'light' 
-    ? 'bg-gradient-to-b from-slate-50 via-purple-50/20 to-slate-100'
+    ? 'bg-[#fafafc]' 
     : 'bg-[#07070a]';
 
   const gradientOverlay = theme === 'light'
-    ? 'from-[#ffffff] via-transparent to-[#ffffff]'
-    : 'from-[#07070a] via-transparent to-[#07070a]';
+    ? 'from-[#fafafc]/70 via-transparent to-[#fafafc]/90'
+    : 'from-[#07070a]/60 via-transparent to-[#07070a]/90';
 
   return (
     <div 
       className={`fixed inset-0 w-screen h-screen overflow-hidden pointer-events-none z-0 ${ambientBg}`}
     >
-      {/* 1. AMBIENT ANIMATED FALLBACK LAYER: Ensures background is NEVER black even if video fails or on low-power mode */}
+      {/* 1. AMBIENT ANIMATED LIGHTING LAYER */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Animated glowing gradient orb 1 */}
         <div 
-          className={`absolute -top-1/4 -left-1/4 w-[70vw] h-[70vw] max-w-[600px] max-h-[600px] rounded-full blur-[100px] sm:blur-[140px] opacity-30 sm:opacity-40 animate-float-slow ${
-            theme === 'light' ? 'bg-purple-300/40' : 'bg-violet-700/30'
+          className={`absolute -top-1/4 -left-1/4 w-[70vw] h-[70vw] max-w-[600px] max-h-[600px] rounded-full blur-[120px] sm:blur-[160px] ${
+            theme === 'light' ? 'bg-violet-200/50 opacity-40 animate-float-slow' : 'bg-violet-700/30 opacity-30 animate-float-slow'
           }`}
         />
 
         {/* Animated glowing gradient orb 2 */}
         <div 
-          className={`absolute -bottom-1/4 -right-1/4 w-[70vw] h-[70vw] max-w-[600px] max-h-[600px] rounded-full blur-[100px] sm:blur-[140px] opacity-25 sm:opacity-35 animate-float-slower ${
-            theme === 'light' ? 'bg-indigo-200/40' : 'bg-indigo-600/25'
+          className={`absolute -bottom-1/4 -right-1/4 w-[70vw] h-[70vw] max-w-[600px] max-h-[600px] rounded-full blur-[120px] sm:blur-[160px] ${
+            theme === 'light' ? 'bg-indigo-100/60 opacity-50 animate-float-slower' : 'bg-indigo-600/25 opacity-25 animate-float-slower'
           }`}
         />
 
         {/* Subtle grid pattern overlay */}
         <div 
-          className={`absolute inset-0 opacity-20 sm:opacity-30 ${
-            theme === 'light' ? 'grid-bg-light' : 'grid-bg-dark'
+          className={`absolute inset-0 ${
+            theme === 'light' ? 'grid-bg-light opacity-30' : 'grid-bg-dark opacity-30'
           }`}
         />
       </div>
 
-      {/* 2. CINEMATIC VIDEO LAYER: Muted, inline, seamless native HTML5 loop */}
+      {/* 2. CINEMATIC VIDEO LAYER: Crisp, fluid visual texture across both themes */}
       {!hasError && (
         <video
           ref={videoRef}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
-          className={`w-full h-full object-cover select-none pointer-events-none transition-opacity duration-1000 ${
-            isPlaying ? (theme === 'light' ? 'opacity-30' : 'opacity-40') : 'opacity-0'
+          className={`w-full h-full object-cover select-none pointer-events-none transition-opacity duration-700 ${
+            isPlaying || true
+              ? theme === 'light'
+                ? 'opacity-25 mix-blend-luminosity filter contrast-125'
+                : 'opacity-45 filter brightness-95 contrast-110'
+              : 'opacity-0'
           }`}
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
+          crossOrigin="anonymous"
+          onLoadedData={() => {
+            setIsPlaying(true);
+            setHasError(false);
+          }}
           onPlaying={() => {
             setIsPlaying(true);
             setHasError(false);
@@ -128,7 +138,6 @@ export default function CinematicVideo({ theme }: CinematicVideoProps) {
       {/* 3. GRADIENT VIGNETTE OVERLAY */}
       <div 
         className={`absolute inset-0 bg-gradient-to-b ${gradientOverlay} pointer-events-none`}
-        style={{ mixBlendMode: 'normal' }}
       />
     </div>
   );

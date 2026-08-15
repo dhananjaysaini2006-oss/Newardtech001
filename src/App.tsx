@@ -13,6 +13,7 @@ import Portfolio from './pages/Portfolio';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import CinematicVideo from './components/CinematicVideo';
+import CursorGlow from './components/CursorGlow';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
@@ -70,8 +71,11 @@ export default function App() {
 
   return (
     <div className={`min-h-screen flex flex-col justify-between transition-colors duration-500 overflow-x-hidden select-none relative ${
-      theme === 'light' ? 'bg-[#ffffff] text-black' : 'bg-[#07070a] text-white'
+      theme === 'light' ? 'bg-[#fafafc] text-neutral-950' : 'bg-[#07070a] text-white'
     }`}>
+      {/* Global Cursor Ambient Glow */}
+      <CursorGlow theme={theme} />
+
       {/* Global Cinematic Background Video */}
       <CinematicVideo theme={theme} />
 
@@ -88,10 +92,10 @@ export default function App() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -16, filter: 'blur(4px)' }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             {renderPage()}
           </motion.div>

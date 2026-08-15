@@ -5,6 +5,7 @@
 
 import ContactForm from '../components/ContactForm';
 import { Theme } from '../types';
+import { motion } from 'motion/react';
 
 interface ContactProps {
   theme: Theme;
@@ -26,7 +27,13 @@ export default function Contact({ theme }: ContactProps) {
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
         
         {/* Title Block */}
-        <div className="max-w-3xl mb-16 space-y-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-16 space-y-6"
+        >
           <span className={`text-xs uppercase font-mono tracking-widest px-3 py-1 rounded-full border inline-block ${
             theme === 'light'
               ? 'border-black/5 bg-black/5 text-[#6f6f6f]'
@@ -42,10 +49,17 @@ export default function Contact({ theme }: ContactProps) {
           }`}>
             Submit your goals below. Our core engineering team will construct a comprehensive diagnostic proposal and schedule a direct video consultation with you.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cohesive form layout wrapper */}
-        <ContactForm theme={theme} />
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <ContactForm theme={theme} />
+        </motion.div>
 
       </div>
     </div>
